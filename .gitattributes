@@ -1,0 +1,6 @@
+# Ensure Gradle Wrapper jar is never corrupted by text formatting translations
+*.jar binary
+
+# Ensure Gradle Wrapper scripts have correct line endings
+gradlew text eol=lf
+gradlew.bat text eol=crlf
