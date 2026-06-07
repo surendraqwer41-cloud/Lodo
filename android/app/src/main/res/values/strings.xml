@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Ludo King Royale</string>
+    <string name="title_activity_main">Ludo King Royale</string>
+    <string name="package_name">com.surendra.ludo</string>
+    <string name="custom_url_scheme">com.surendra.ludo</string>
+</resources>
