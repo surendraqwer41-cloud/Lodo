@@ -1,0 +1,6 @@
+{
+  "name": "Ludo King Royale 3D",
+  "description": "Ultra-realistic 3D Ludo game featuring a luxury wooden board, realistic physics-based dice rolling, offline AI opponents, smart pass-and-play, stunning visual cosmetics, and rich sound effects.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
