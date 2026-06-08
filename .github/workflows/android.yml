@@ -1,60 +1,49 @@
 name: Build Android APK
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
-      - master
-  pull_request:
-  workflow_dispatch:
 
 jobs:
-  build:
-    name: Build Capacitor Android App
+  build-android:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v4
 
-      - name: Set up Java Development Kit (JDK) 17
+      - name: Set up Java JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'zulu'
-          cache: 'gradle'
+          distribution: temurin
+          java-version: 17
 
-      - name: Set up Node.js 22 LTS
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'npm'
+          node-version: 22
 
-      - name: Install Project Dependencies
-        run: |
-          npm install
+      - name: Install Dependencies
+        run: npm install
 
-      - name: Build Web Application
-        run: |
-          npm run build
+      - name: Build Web App
+        run: npm run build
 
-      - name: Sync Web Assets to Native Android Platform
-        run: |
-          npx cap sync android
+      - name: Sync Capacitor Android
+        run: npx cap sync android
 
-      - name: Download Valid Gradle Wrapper JAR (Prevents Git Corruption)
-        run: |
-          mkdir -p android/gradle/wrapper
-          curl -L -f -o android/gradle/wrapper/gradle-wrapper.jar https://raw.githubusercontent.com/gradle/gradle/v8.12.0/gradle/wrapper/gradle-wrapper.jar
+      - name: Make Gradle Executable
+        run: chmod +x android/gradlew
 
-      - name: Build Android App using Gradle Wrapper
+      - name: Build Debug APK
         run: |
           cd android
-          chmod +x gradlew
           ./gradlew assembleDebug
 
-      - name: Upload Android Debug APK Artifact
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: app-debug.apk
+          name: app-debug-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
