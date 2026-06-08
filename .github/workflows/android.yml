@@ -42,6 +42,11 @@ jobs:
         run: |
           npx cap sync android
 
+      - name: Download Valid Gradle Wrapper JAR (Prevents Git Corruption)
+        run: |
+          mkdir -p android/gradle/wrapper
+          curl -L -f -o android/gradle/wrapper/gradle-wrapper.jar https://raw.githubusercontent.com/gradle/gradle/v8.12.0/gradle/wrapper/gradle-wrapper.jar
+
       - name: Build Android App using Gradle Wrapper
         run: |
           cd android
